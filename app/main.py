@@ -44,11 +44,8 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
-@app.post("/v1/create-cloud-development-environment", response_class=JSONResponse, summary="Run this after you are done testing within AWS. This will clean up orphaned resources. Note: you may have to run this 2x.")
+@app.post("/v1/create-cloud-development-environment", response_class=JSONResponse, summary="Run this to create a new developer environment.  Be sure to update the request parameters")
 async def nuke_aws_captain_account(request: CloudDevelopmentEnvironmentRequest):
-    """
-     Submit the AWS account name you want to nuke (e.g. glueops-captain-foobar)
-    """
     url = github.create_cloud_development_environment(request)
     return {"url": url} 
 
